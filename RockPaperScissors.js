@@ -7,14 +7,22 @@ function computerPlay() {
         // console.log(b)
 }
 
-
+function playerSelect(userChoice) {
+    
+    userChoice = window.prompt("Pick your Choice of Rock, Paper or Scissors!").toLowerCase();
+    
+    while (userChoice != "scissors" && userChoice != "rock" && userChoice != "paper") {
+        userChoice = window.prompt(userChoice + " is not a valid choice, please pick Rock, Paper or Scissors").toLowerCase();
+    
+    } return userChoice
+} 
 
 function playRound(playerSelection, computerSelection) {
+    // playerSelection = window.prompt("Pick your Choice!")
+    // computerSelection = computerPlay();
     
-    computerSelection = computerPlay();
-    // playerSelection.toLowerCase(); //causing game() errors for some reason, needs debugging. 
     if (playerSelection == computerSelection) {
-        return "Draw";
+        return "Draw, try again!";
         
     } else if (playerSelection === "rock" && computerSelection === "scissors") {
         return "You Win!";
@@ -26,36 +34,53 @@ function playRound(playerSelection, computerSelection) {
         return "You Win!"
 
     } else return "You Lose, but Try Again!"
+
 }
 
+// If we want user to play one game only. 
+// const result = playRound(playerSelect(), computerPlay());
+// console.log(result);
+
+////////////remove comments to check if playRound() works//////////////////
 // let playerSelection = "rock";
 // const computerSelection = computerPlay();
 // console.log(playRound(playerSelection, computerSelection));
 
-// let playerTotal = 100;
 
 function game() {
+    
     let playerTotal = 0, compTotal = 0;
-    for (let i=1; i<=5; i++) {
-        if (playRound() === "You Win!") {
+    
+    for (let i=1; i<6; i++) {
+        
+        const oneRound = playRound(playerSelect(), computerPlay());
+        
+        if (oneRound === "You Win!") {
             playerTotal = playerTotal + 1;
-        
-        } else if (playRound() === "You Lose, but Try Again!") {
-            compTotal = compTotal + 1;
-        
-        } else if (playRound() === "Draw") {
-            playerTotal = playerTotal + 0;
-            compTotal = compTotal + 0;
-        }
+            console.log(oneRound)
 
-    } if (playerTotal > compTotal) {
-        return "You Won this game!"
-        
-    } else if (playerTotal < compTotal) {
+        } else if (oneRound === "You Lose, but Try Again!") {
+            compTotal = compTotal + 1;
+            console.log(oneRound)
+
+        } else if (oneRound === "Draw, try again!") {
+            console.log(oneRound)
+        }
+    } 
+    
+    if (playerTotal < compTotal) {
         return "You Lost the game, try again!"
 
     } else if (playerTotal === compTotal) {
-        return "Draw, try again!"
-    } 
+        return "You drew against the computer, give the game another go!"
 
+    } else if (playerTotal > compTotal) {
+        return "You Won this game!"
+
+    }else {
+        return "Error, Please refresh and try again"
+    }  
 }
+
+//If we want user to play game of 5 immedietely. 
+// game();
