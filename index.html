@@ -5,17 +5,66 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=, initial-scale=1.0">
     <title>Rock Paper Scissors </title>
-    <script src="RockPaperScissors.js"></script>
+    <script src="RockPaperScissors.js" defer></script>
+    <link rel = "stylesheet" href = "./styles.css">
 
 </head>
 <body>
+
+    <header>
+
+        <p> Welcome to the Arena - Choose your weapon! </p>
+        <p> Best of 5 Wins - Good Luck! </p>
+
+    </header>
     
+    <!-- Player Choices Section -->
+    <section class = "playerChoice">
+    
+        <div class = "options">
+            <p class="selection"> Rock </p>
+            <img src = "images/rock.png" alt = "hand sign showing rock choice" id="rock">
+            
+        </div>
+    
+        <div class = "options">
+            <p class="selection"> Paper </p>
+            <img src = "images/paper.png" alt = "hand sign showing paper choice" id = "paper">
+            
+        </div>
 
+        <div class = "options">
+            <p class="selection"> Scissors </p>
+            <img src = "images/scissors.png" alt = "hand sign showing scissors choice" id = "scissors">
+            
+        </div>
 
-    <script>
+    </section>
 
+    <section class = "resultsTab"> 
+    <!-- Player outcome description added via JS file -->
+    
+    </section>
+
+    <section class = "scoreTab">
+        <div>
+            <p> Player Score </p>
+            <div class="playerScore"> Score = 0 </div>
+        </div>
+
+        <div>
+            <p> Computer Score </p>
+            <div class = "computerScore"> Score = 0 </div>
+        </div>
         
-        
-    </script>
+    </section>
+
+    <footer>
+
+        <a src = "mygithublink"> JayC GitHub </a>
+        <!-- <button class = "reset"> Reset Game </button> -->
+
+    </footer>
+
 </body>
 </html>

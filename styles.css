@@ -1,0 +1,149 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    justify-content: space-between;
+}
+
+header {
+    height: 150px;
+    background-color: rgb(49, 50, 78);
+    color:white;
+    border-bottom: 2px solid black;
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
+    justify-content: space-evenly;
+    align-items: center;
+    font-size: 32px;
+}
+
+header p {
+    margin: 0px;
+    padding: 5px;
+}
+
+img {
+    width: 300px;
+    height: 300px;
+}
+
+.playerChoice {
+    display: flex;
+    justify-content: center;
+    
+}
+
+.options, .resultsPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px;
+    
+}
+
+.options > p {
+    font-size: 40px;
+}
+
+.draw, .win, .lose {
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.draw {
+    border: 2px solid yellow;
+}
+
+.win {
+    border: 2px solid green;
+}
+
+.lose {
+    border: 2px solid red;
+}
+
+.resultsTab, .scoreTab {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.scoreTab {
+    padding: 50px;
+    gap: 100px;
+}
+
+.scoreTab > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.playerScore, .computerScore {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 120px;
+    border: 2px solid black;
+    border-radius: 10px;
+
+    position: relative;
+    top: -5px; /* this will raise the element */
+}
+
+
+.resultsTab > p {
+    display: flex;
+    align-items: center;
+}
+
+.finalResultLoss, .finalResultWin {
+    display: flex;
+    padding: 30px;
+    margin: 10px;
+}
+
+.finalResultWin {
+    background-color: green;
+    border: 2px solid black;
+}
+
+.finalResultLoss {
+    background-color: red;
+    border: 2px solid black;
+}
+
+.resetButton {
+    margin: 50px;
+    border: 2px solid black;
+    border-radius: 20px;
+    padding: 50px;
+    background-color: purple;
+    color: white;
+}
+
+footer {
+    height: 50px;
+    background-color: rgb(49, 50, 78);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 11px;
+}
+
+.highlight {
+    transform: scale(1.2);
+    border-color: #ffc800ef;
+    box-shadow: 0 0 1rem #ffc800ef; 
+}
+
+.playerScoreArea {
+    background-color: green;
+}
+
+.computerScoreArea {
+    background-color: red;
+}

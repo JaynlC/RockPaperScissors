@@ -1,10 +1,12 @@
+// global scope parameters for score keeping
+let playerTotal = 0, compTotal = 0;
 
 
 function computerPlay() {
     let a  = ["rock","paper","scissors"]
         b = a[Math.floor(Math.random()*a.length)];
         return b;
-        // console.log(b)
+        //update DOM to show computerSelection
 }
 
 function playerSelect(userChoice) {
@@ -18,69 +20,173 @@ function playerSelect(userChoice) {
 } 
 
 function playRound(playerSelection, computerSelection) {
-    // playerSelection = window.prompt("Pick your Choice!")
-    // computerSelection = computerPlay();
+    
+    // removes the previous results written by playround(), if played before. 
+    const selectResults = document.querySelector(".resultsTab");
+    while (selectResults.firstChild) {
+        selectResults.removeChild(selectResults.firstChild);
+    }
+
+    let winResult = document.createElement("p");
+    let drawResult = document.createElement("p");
+    let loseResult = document.createElement("p");
+
+    let playerScore = document.querySelector(".playerScore");
+    let computerScore = document.querySelector(".computerScore");
     
     if (playerSelection == computerSelection) {
-        return "Draw, try again!";
+        console.log("draw")
+        drawResult.textContent = `Draw, Try Again!`;
+        drawResult.classList.add("draw")
+        selectResults.appendChild(drawResult);
         
+
     } else if (playerSelection === "rock" && computerSelection === "scissors") {
-        return "You Win!";
+        console.log("win")
+        playerTotal=playerTotal +1;
+        playerScore.textContent = `Score = ${playerTotal}`;
+        winResult.textContent = `You Win!`;
+        winResult.classList.add("win")
+        selectResults.appendChild(winResult);
+
         
+
     } else if (playerSelection ==="paper" && computerSelection === "rock") {
-        return "You Win!";
-    
+        console.log("win")
+        playerTotal=playerTotal +1;
+        playerScore.textContent = `Score = ${playerTotal}`;
+        winResult.textContent = `You Win!`;
+        winResult.classList.add("win")
+        selectResults.appendChild(winResult);
+        
+
     } else if (playerSelection ==="scissors" && computerSelection ==="paper") {
-        return "You Win!"
+        console.log("win")
+        playerTotal=playerTotal +1;
+        playerScore.textContent = `Score = ${playerTotal}`;
+        winResult.textContent = `You Win!`;
+        winResult.classList.add("win")
+        selectResults.appendChild(winResult);
+        
 
-    } else return "You Lose, but Try Again!"
-
+    } else {
+        console.log("Lose")
+        compTotal = compTotal+1;
+        computerScore.textContent = `Score = ${compTotal}`;
+        loseResult.textContent = `You Lose, but Try Again!`;
+        loseResult.classList.add("lose")
+        selectResults.appendChild(loseResult);
+        
+    }
 }
 
-// If we want user to play one game only. 
-// const result = playRound(playerSelect(), computerPlay());
-// console.log(result);
-
-////////////remove comments to check if playRound() works//////////////////
-// let playerSelection = "rock";
-// const computerSelection = computerPlay();
-// console.log(playRound(playerSelection, computerSelection));
-
-
-function game() {
+function countScores() {
     
-    let playerTotal = 0, compTotal = 0;
+    // setting up results screen DOM
+    const results = document.querySelector(".playerChoice");
+    let finalResult = document.createElement("div");
     
-    for (let i=1; i<6; i++) {
-        
-        const oneRound = playRound(playerSelect(), computerPlay());
-        
-        if (oneRound === "You Win!") {
-            playerTotal = playerTotal + 1;
-            console.log(oneRound)
-
-        } else if (oneRound === "You Lose, but Try Again!") {
-            compTotal = compTotal + 1;
-            console.log(oneRound)
-
-        } else if (oneRound === "Draw, try again!") {
-            console.log(oneRound)
+    
+    if (playerTotal>4 || compTotal >4) {
+        if (playerTotal < compTotal) {
+            console.log("You Lost!");
+            finalResult.classList.add("finalResultLoss");
+            finalResult.textContent = `You Lost, but Try your luck again!`;
+            results.appendChild(finalResult);
+            stopgame();
+            
+    
+        } else if (playerTotal > compTotal) {
+            console.log("You Won!");
+            finalResult.classList.add("finalResultWin");
+            finalResult.textContent = `Congratulations, You Won! Will you be Lucky next time?!`;
+            results.appendChild(finalResult);
+            stopgame();
         }
-    } 
-    
-    if (playerTotal < compTotal) {
-        return "You Lost the game, try again!"
-
-    } else if (playerTotal === compTotal) {
-        return "You drew against the computer, give the game another go!"
-
-    } else if (playerTotal > compTotal) {
-        return "You Won this game!"
-
-    }else {
-        return "Error, Please refresh and try again"
-    }  
+           
+    }
 }
 
-//If we want user to play game of 5 immedietely. 
-// game();
+function stopgame() {
+    // removes previous result description on DOM
+    const selectResults = document.querySelector(".resultsTab");
+    while (selectResults.firstChild) {
+        selectResults.removeChild(selectResults.firstChild);
+    }
+    // remove all images to display the results screen.
+    const results = document.querySelector(".playerChoice");
+    const hideImages = document.querySelectorAll(".options");
+    hideImages.forEach(hide => {
+        results.removeChild(hide);
+    })
+    restartGame();
+}
+
+function restartGame() {
+    // Add reset function
+    const results = document.querySelector(".playerChoice");
+    const resetButton = document.createElement("div");
+    
+    resetButton.classList.add("resetButton")
+    resetButton.innerText = "Click Me to Play a New Round!"
+    results.appendChild(resetButton);
+    results.classList.toggle("playerChoice");
+    results.classList.toggle("resultsPage")
+    resetButton.addEventListener("click", () => {
+        location.reload();
+    })
+
+    //highlight the winning score
+    const playerScoreArea = document.querySelector(".playerScore");
+    const computerScoreArea = document.querySelector(".computerScore");
+    if (playerTotal > compTotal) {
+        playerScoreArea.classList.toggle("playerScoreArea");
+    } else if (compTotal > playerTotal) {
+        computerScoreArea.classList.toggle("computerScoreArea");
+    }
+}
+
+function hoverScoresArea() {
+    const playerScoreArea = document.querySelector(".playerScore");
+    const computerScoreArea = document.querySelector(".computerScore");
+    const imagehover = document.querySelectorAll("img");
+    
+    playerScoreArea.addEventListener("mouseenter", () => {
+        playerScoreArea.classList.toggle("playerScoreArea");
+    })
+    playerScoreArea.addEventListener("mouseleave", () => {
+        playerScoreArea.classList.toggle("playerScoreArea");
+    })
+    
+    computerScoreArea.addEventListener("mouseenter", () => {
+        computerScoreArea.classList.toggle("computerScoreArea");
+    })
+    computerScoreArea.addEventListener("mouseleave", () => {
+        computerScoreArea.classList.toggle("computerScoreArea");
+    })
+
+    imagehover.forEach(image => {
+        image.addEventListener("mouseenter", () =>{
+            image.classList.toggle("highlight");
+        })
+    });
+    imagehover.forEach(image => {
+        image.addEventListener("mouseleave", () =>{
+            image.classList.toggle("highlight");
+        })
+    });
+}
+
+function startGame() {
+    const optionSelection = document.querySelectorAll("img");
+    optionSelection.forEach(option => {
+        option.addEventListener("click", () => {
+            const oneRound = playRound(option.id, computerPlay());
+            // option.classList.toggle("highlight");
+            countScores();
+        })
+    })
+}
+
+hoverScoresArea()
+startGame();
